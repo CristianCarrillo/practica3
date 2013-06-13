@@ -1,0 +1,45 @@
+﻿using System;
+
+namespace Tarea3{
+
+	class Principal{
+		
+		public static void Main (string[] args){
+			
+		
+			Programa programa = new Programa();
+			programa.Captura();
+			Console.Clear();
+			string opc;
+			do{
+			Console.WriteLine("Desea Editar?");
+			Console.WriteLine("1.No");
+			Console.WriteLine("2.Si");
+			opc = Console.ReadLine();
+			if(opc != "1"){
+				programa.Editar();
+				}
+			}
+			while (opc != "1");
+			Console.Clear();
+			string opc2;
+			do{
+				Console.WriteLine("Desea Eliminar?");
+				Console.WriteLine("1.No");
+				Console.WriteLine("2.Si");
+				opc2 = Console.ReadLine();
+			
+				if(opc2 != "1"){
+					Console.Clear();
+					programa.Eliminar();}
+				}
+			while (opc2 != "1");
+			Console.Clear();
+			programa.imprimir();
+			Console.WriteLine("Presione una Tecla para Continuar");
+			Console.ReadKey();		
+		}
+	}
+}
+
+

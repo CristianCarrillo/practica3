@@ -1,0 +1,126 @@
+﻿using System;
+using System.Collections;
+
+namespace Tarea3{
+	
+	public class Programa{	
+		private Hashtable tablaPersonas;
+
+		public Programa(){
+			this.tablaPersonas = new Hashtable();
+			}
+
+		public void Captura(){
+			for(int i = 0; i<4 ;i++){
+				Console.Clear();
+				this.capturarPersona(new Persona());
+				}
+			}
+
+		private void capturarPersona(Persona persona){
+			this.capturarDatos(persona);
+			this.agregarPersona(persona);
+
+			}
+
+		private void capturarDatos(Persona persona){
+			Console.WriteLine("~Capturacion de Datos~");
+			Console.WriteLine("");
+			Console.WriteLine("");
+			
+			if(persona.codigo == ""){
+				Console.Write("CODIGO: ");
+				persona.codigo = Console.ReadLine();}
+			Console.Write("NOMRE: ");
+			persona.nombre = Console.ReadLine();
+			Console.Write("DIRECCION: ");
+			persona.direccion = Console.ReadLine();
+			Console.Write("TELEFONO: ");
+			persona.telefono = Console.ReadLine();
+			Console.Write("FACEBOOK: ");
+			persona.facebook = Console.ReadLine();
+}
+
+		private void agregarPersona(Persona persona){	
+			if(this.tablaPersonas.ContainsKey(persona.codigo)){
+				this.tablaPersonas.Remove(persona.codigo);
+				}
+
+			this.tablaPersonas.Add(persona.codigo,persona);
+			}
+
+		public void Editar(){
+			Console.Clear();
+			string codigo = "";
+			Console.WriteLine("Pantalla de Editacion");
+			Console.WriteLine("-------------------------------------------------------------");
+			Console.WriteLine("");
+			Console.WriteLine("");
+			Console.WriteLine("Codigo a Editar:");
+			codigo = Console.ReadLine();
+			if(this.tablaPersonas.ContainsKey(codigo)){
+				Persona persona = (Persona)this.tablaPersonas[codigo];
+				this.imprimePersona(persona);
+				this.capturarPersona(persona);
+			}else{
+				this.Error();
+			}	
+		}
+
+		public void Eliminar(){
+			Console.Clear();
+			string codigo = "";
+			Console.WriteLine("Pantalla de Eliminacion");
+			Console.WriteLine("-------------------------------------------------------------");
+			Console.WriteLine("");
+			Console.WriteLine("Codigo a Eliminar: ");
+			codigo = Console.ReadLine();
+			if(this.tablaPersonas.ContainsKey(codigo)){
+				Persona persona = (Persona) this.tablaPersonas[codigo];
+				this.imprimePersona(persona);
+				this.confElimina(persona.codigo);
+			}else{
+				this.Error();
+			}
+		}
+
+		private void confElimina(string codigo){
+			Console.WriteLine("");
+			Console.WriteLine("¿Esta seguro que desea eliminar?");
+			Console.WriteLine("1.No");
+			Console.WriteLine("2.Si");
+			string opcion = Console.ReadLine();
+			if(opcion != "1"){
+				this.tablaPersonas.Remove(codigo);
+				}
+			}
+
+		private void Error(){
+			Console.WriteLine("Codigo Invalido.");
+			Console.WriteLine("Presiona una tecla para continuar...");
+			Console.ReadLine();
+			}
+
+		public void imprimir(){
+			ICollection personas = this.tablaPersonas.Values;
+			Console.WriteLine("Tabla de Datos");
+			Console.WriteLine("-------------------------------------------------------------");
+			Console.WriteLine("");
+			Console.WriteLine("");
+			foreach( object objeto in personas ){
+				Persona persona = (Persona) objeto;
+				this.imprimePersona(persona);
+				}
+		}
+
+		private void imprimePersona(Persona persona){
+			Console.WriteLine("Código: " + persona.codigo);
+			Console.WriteLine("Nombre: " + persona.nombre);
+			Console.WriteLine("Dirección: " + persona.direccion);
+			Console.WriteLine("Teléfono: " + persona.telefono);
+			Console.WriteLine("Facebook: " + persona.facebook);
+			Console.WriteLine("");
+			}
+
+	}
+}
